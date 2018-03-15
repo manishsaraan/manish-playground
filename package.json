@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/manishsaraan/manish-playground/issues"
   },
-  "homepage": "https://github.com/manishsaraan/manish-playground#readme"
+  "homepage": "https://github.com/manishsaraan/manish-playground#readme",
+  "dependencies": {
+    "gatsby-plugin-typography": "^1.7.18",
+    "typography-theme-fairy-gates": "^0.15.11"
+  }
 }
