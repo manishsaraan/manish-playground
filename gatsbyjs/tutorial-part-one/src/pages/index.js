@@ -8,4 +8,5 @@ export default () =>
                     <Link to="/page-2/">Page 2</Link>
                     <Link to="/page-3/">Page 3</Link>
                     <Link to="/counter/">Counter</Link>
+                    <button class="primary-button">Primary Button</button>
                     </div>)
