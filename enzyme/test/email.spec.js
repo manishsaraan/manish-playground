@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
-
+import sinon from 'sinon';
 import Email from '../lib/email';
 
 describe('<Email/>', () => {
@@ -19,4 +19,12 @@ describe('<Email/>', () => {
       expect(wrapper.props().handleEmailChange).to.be.defined;
       expect(wrapper.props().fetchGravatar).to.be.defined;
   });
+
+  it('should call updateGravatar once', () => {
+    const onButtonClick = sinon.spy();
+    const wrapper = shallow(<Email fetchGravatar={onButtonClick} />)
+    wrapper.find('button').simulate('click');  
+    expect(onButtonClick.calledOnce).to.equal(true);
+  });
+
 });
