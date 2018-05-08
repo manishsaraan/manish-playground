@@ -1,20 +1,20 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
+export default class Avatar extends React.PureComponent {
+  static propTypes = {
+    email: PropTypes.string,
+    src: PropTypes.string,
+  };
 
-export default class Avatar extends React.Component {
   render() {
     return (
       <div className="avatar">
         <p>
           <em>{this.props.email}</em>
         </p>
-        <img src={this.props.src} className="img-rounded"/>
+        <img src={ this.props.src } className="img-rounded" />
       </div>
     );
   }
 }
-
-Avatar.propTypes = {
-  email: PropTypes.string,
-  src: PropTypes.string,
-};
