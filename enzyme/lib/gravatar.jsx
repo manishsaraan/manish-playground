@@ -12,7 +12,11 @@ export default class Gravatar extends React.Component {
       src: 'http://placehold.it/200x200'
     }
   }
-
+  
+  renderTitle(){
+    return (<h4>Avatar for:</h4>);
+  }
+  
   updateGravatar() {
     this.setState({
       src: `http://gravatar.com/avatar/${md5(this.state.email)}?s=200`
@@ -26,7 +30,7 @@ export default class Gravatar extends React.Component {
   render() {
     return (
       <div className="react-gravatar">
-        <h4>Avatar for:</h4>
+        {this.renderTitle()}
         <Avatar email={this.state.email} src={this.state.src}/>
         <Email fetchGravatar={this.updateGravatar.bind(this)} handleEmailChange={this.updateEmail.bind(this)}/>
       </div>
