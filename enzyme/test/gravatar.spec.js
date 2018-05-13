@@ -8,7 +8,7 @@ import Email from '../lib/email';
 import { wrap } from 'module';
 
 describe('<Gravatar/>', () => {
-    const wrapper = mount(<Gravatar/>);
+    const wrapper = mount(<Gravatar email={'sdfdf'}/>);
 
     it('it contains a <Avatar/> component', () => {
       
@@ -36,4 +36,5 @@ describe('<Gravatar/>', () => {
         expect(wrapper.state('email')).to.equal('hello@mail.com');
         expect(wrapper.state('src')).to.equal(`http://gravatar.com/avatar/${md5('hello@mail.com')}?s=200`)        
     });
+    
 });
