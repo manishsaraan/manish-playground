@@ -5,12 +5,21 @@ export function* incrementAsync() {
     yield delay(1000);
     yield put({type: 'INCREMENT'});
 }
-export function* watchIncrementAsync(params) {
+export function* watchIncrementAsync() {
     yield takeEvery('INCREMENT_ASYNC', incrementAsync);
+}
+
+export function *decrementAsync() {
+    yield delay(1000);
+    yield put({ type: 'DECREMENT'});
+}
+export function *watchDecrementAsync() {
+    yield takeEvery('DECREMENT_ASYNC', decrementAsync);
 }
 
 export default function* rootSaga() {
     yield all([
         watchIncrementAsync(),
+        watchDecrementAsync(),
     ])
 }
