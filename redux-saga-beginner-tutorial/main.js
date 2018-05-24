@@ -9,7 +9,9 @@ import Counter from './Counter'
 import reducer from './reducers'
 
 import rootSaga  from './sagas';
+const validator = require('./index.cjs');
 
+console.log(validator);
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   reducer,
