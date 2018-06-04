@@ -1,45 +1,29 @@
 import React, { Component } from 'react';
+import LifeCycleMethods from './life-cycle-component';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  componentWillMount(){
-    console.log('componentwillmout exicuted.');
+  state = {
+    showLifyCycle: true,
+    totalClicks: 0,
+  }
+  toggleLifeCycle = () => {
+    this.setState({showLifyCycle: !this.state.showLifyCycle});
   }
 
-  componentDidMount(){
-    console.log('componentdidmount');
-  }
-
-  componentWillReceiveProps(nextProps){
-    console.log('componetwillrecieveprops',nextProps);
-  }
-
-  shouldComponentUpdate(nextProps, nextState){
-    console.log('should component updated', nextProps,nextState);
-  }
-
-  componentWillUpdate(nextProps, state){
-    console.log('compnentwillupdate', nextProps, state);
-  }
-
-  componentDidUpdate(prevProps, prevState){
-    console.log('componentdidUPdate', prevState, prevState);
-  }
-
-  componentWillUnmount(){
-    console.log('component will unmount')
+  updateCount = () => {
+    this.setState({totalClicks: this.state.totalClicks + 1});
   }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+        <header className="App-header">          
+          <h1 className="App-title">Welcome to Reacts</h1>
+          <button type="button" onClick={this.updateCount}>Update Count</button>
+          <button type="button" onClick={this.toggleLifeCycle}>{this.state.showLifyCycle ? 'Hide': 'Show'}</button>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {this.state.showLifyCycle && <LifeCycleMethods clicks={this.state.totalClicks}/>}
       </div>
     );
   }
