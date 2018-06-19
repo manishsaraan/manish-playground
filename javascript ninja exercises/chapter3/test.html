@@ -63,6 +63,24 @@
 
      assert(ninja1.skull() ===ninja1, 'ninja1 is taking the skulling');
      assert(ninja2.skull() ===ninja2, 'ninja2 is taking the skulling');
+
+     //invoking with apply() and call()
+     function juggle(){
+         var result = 0;
+         for( var n = 0; n < arguments.length; n++ ){
+            result +=arguments[n];
+         }
+         this.results =result;
+     }
+
+     var ninja3 = {};
+     var ninja4 = {};
+
+     juggle.apply(ninja3, [1,2,3,4,5]);
+     juggle.call(ninja4,1,2,3,4,5);
+     assert(ninja3.results === 15, 'juggle with apply');
+     assert(ninja4.results === 15, 'juggle with call');
+
     </script>
 </body>
 </html>
