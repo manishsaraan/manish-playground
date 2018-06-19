@@ -81,6 +81,17 @@
      assert(ninja3.results === 15, 'juggle with apply');
      assert(ninja4.results === 15, 'juggle with call');
 
+     //creating a for-each
+     function forEach(list, callback){
+         for(var n=0 ;n<list.length; n++){
+             callback.call(list[n], n);
+         }
+     }
+     var weapons = ['katana', 'yari', 'naginata'];
+     forEach(weapons, function(index){
+         assert(this == weapons[index], 'Got the expected value of ' + weapons[index])
+     });
+
     </script>
 </body>
 </html>
