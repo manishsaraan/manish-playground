@@ -12,7 +12,8 @@ class App extends Component {
     this.removeNote = this.removeNote.bind(this);
 
     this.app = firebase.initializeApp({});
-    this.database = this.app.database().ref().child('notes');
+    this.database = this.app.database().ref();
+    this.notes = this.database.child('notes');
 
     // We're going to setup the React state of our component
     this.state = {
@@ -22,20 +23,38 @@ class App extends Component {
 
   componentWillMount(){
     const previousNotes = this.state.notes;
+    // const notesRef = this.app.database().ref('notes');
 
     // DataSnapshot
-    this.database.on('child_added', snap => {
-      previousNotes.push({
-        id: snap.key,
-        noteContent: snap.val().noteContent,
-      })
-
-      this.setState({
-        notes: previousNotes
-      })
+    this.notes.orderByKey().on('child_added', snap => {
+      const key = snap.val().id;
+        console.log(snap.key)
+      // if(key === 860521){
+        previousNotes.push({
+          id: snap.key,
+          noteContent: snap.val().noteContent,
+        })
+      // }
+        this.setState({
+          notes: previousNotes
+        });
     })
+    this.notes.orderByKey().on('child_changed', snap => {
+      const key = snap.val().id;
+        console.log(snap.key)
+      // if(key === 860521){
+        previousNotes.push({
+          id: snap.key,
+          noteContent: snap.val().noteContent,
+        })
+      // }
+        this.setState({
+          notes: previousNotes
+        });
+    })
+    this.notes.on('child_removed', snap => {
+      console.log('removed',snap.val());
 
-    this.database.on('child_removed', snap => {
       for(var i=0; i < previousNotes.length; i++){
         if(previousNotes[i].id === snap.key){
           previousNotes.splice(i, 1);
@@ -49,12 +68,12 @@ class App extends Component {
   }
 
   addNote(note){
-    this.database.push().set({ noteContent: note});
+    this.notes.push().set({ userId: 55272362360,noteContent: note});
   }
 
   removeNote(noteId){
+    this.database.child('notes/'+noteId).update({id: '1111111111', noteContent: 'this is updated....'});
     console.log("from the parent: " + noteId);
-    this.database.child(noteId).remove();
   }
 
   render() {
