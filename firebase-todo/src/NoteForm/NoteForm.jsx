@@ -12,6 +12,12 @@ class NoteForm extends Component{
         this.writeNote = this.writeNote.bind(this);
     }
 
+    componentWillUpdate(prevProps){
+        if(prevProps.noteContent !== this.props.noteContent){
+            this.setState({newNoteContent: this.props.noteContent});
+            console.log('pnoteContent',this.props)
+        }
+    }
     // When the user input changes, set the newNoteContent
     // to the value of what's in the input box.
     handleUserInput(e){

@@ -17,10 +17,14 @@ class Note extends Component{
 
     render(){
         return(
-            <div className="note fade-in">
-                <span className="closebtn" 
+            <div className="note fade-in" onClick={() => this.props.viewNote({noteId:this.noteId, noteContent: this.noteContent}) }>
+                <span className="closebtn"
                       onClick={() => this.handleRemoveNote(this.noteId)}>
                       &times;
+                </span>
+                 <span className="editbtn"
+                      onClick={() =>  this.props.handleEditNote(this.noteId, this.noteContent)}>
+                      edit
                 </span>
                 <p className="noteContent">{ this.noteContent }</p>
             </div>
