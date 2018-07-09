@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #results li.pass { color: green; }
+    #results li.fail { color: red; } 
+    </style>
+</head>
+<body>
+    <ul id="results"></ul>
+    <script>
+     function assert(value, desc){
+         var li = document.createElement('li');
+         li.className = value ? 'pass' : 'fail';
+         li.appendChild(document.createTextNode(desc));
+         document.querySelector('#results').appendChild(li);
+     }
+
+     function isNimble(){ return true; }
+     assert(typeof window.isNimble === 'function', 'Nibmle is a function');
+     assert(isNimble.name === 'isNimble', 'isNimble() has a name');
+
+     var canFly = function(){ return true; };
+     assert(typeof window.canFly === "function", "canFly() defined");
+     assert(canFly.name === "", "canFly() has no name");
+
+     window.isDeadly = function() { return true; };
+     assert(typeof window.isDeadly === "function", "isDeadly() defined");
+
+     function outer(){
+         assert(typeof inner === 'function', 'inner() in scope before declairation.');
+         function inner(){};
+         assert(typeof inner === 'function', 'inner() in scope after declairation.');
+         assert(typeof window.inner === 'undefined', 'inner() in not available in window scope.');
+     }
+     outer();
+
+     assert(typeof window.inner === 'undefined', 'inner() is still undefined');
+     window.wieldSword = function swingSword() { return true; };
+     assert(window.wieldSword.name === 'swingSword', 'wieldSword() real name is swingSword');
+
+     //invoking as a function and invoking as a method
+     function test() { return this; };
+     assert(test() === window, 'test() is in the window.');
+     var test1 = test;
+     assert(test() === window, 'test1() is in the window');
+     var ninja = {
+         skull : test,
+     }
+     assert(ninja.skull() === ninja, 'the first ninja of skulling');
+
+     //using constructor while invoking a function
+     function constructorNinja() {
+         this.skull = function(){ return this; }
+     }
+
+     var ninja1 = new constructorNinja();
+     var ninja2 = new constructorNinja();
+
+     assert(ninja1.skull() ===ninja1, 'ninja1 is taking the skulling');
+     assert(ninja2.skull() ===ninja2, 'ninja2 is taking the skulling');
+
+     //invoking with apply() and call()
+     function juggle(){
+         var result = 0;
+         for( var n = 0; n < arguments.length; n++ ){
+            result +=arguments[n];
+         }
+         this.results =result;
+     }
+
+     var ninja3 = {};
+     var ninja4 = {};
+
+     juggle.apply(ninja3, [1,2,3,4,5]);
+     juggle.call(ninja4,1,2,3,4,5);
+     assert(ninja3.results === 15, 'juggle with apply');
+     assert(ninja4.results === 15, 'juggle with call');
+
+     //creating a for-each
+     function forEach(list, callback){
+         for(var n=0 ;n<list.length; n++){
+             callback.call(list[n], n);
+         }
+     }
+     var weapons = ['katana', 'yari', 'naginata'];
+     forEach(weapons, function(index){
+         assert(this == weapons[index], 'Got the expected value of ' + weapons[index])
+     });
+
+    </script>
+</body>
+</html>
