@@ -41,3 +41,24 @@ for value in range(5, 19, 2) :  # start from 5, goes upto 10 and increase by 2
         print 'range vlaue is {0}'.format(value)
         break
     print 'value is {0}'.format(value)
+
+student = {
+    "name": "Derek",
+    "id" : 12345,
+    "feedback": None
+}
+student['last_name'] = "test"
+
+try :
+    last_name = student['last_name']
+    numbered_last_name = last_name + 3
+except KeyError: 
+    print 'Error finding last name'
+except TypeError:
+    print 'cnat add these two togther'
+except Exception as error:
+    print error
+print 'this code exicutes'
+
+unordered_list = [3,5,5,4,5,6,7,7]
+print(set(unordered_list))
