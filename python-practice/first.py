@@ -62,3 +62,15 @@ print 'this code exicutes'
 
 unordered_list = [3,5,5,4,5,6,7,7]
 print(set(unordered_list))
+
+def custom_print(name, *args) :  #works as rest in js
+    print name
+    print args
+
+
+def named_args(name, **kwargs) : #pass arguments with name like rest
+    print name
+    print kwargs['desc']
+
+named_args('mark', desc="hello pyton", aware=None, student=False)
+custom_print('hllo', 1, 2,3, None, 'type sometinign.')
