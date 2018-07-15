@@ -128,6 +128,9 @@ print('what is your name')
 #name = sys.stdin.readline()
 #print('Helllow',name)
 
+#a lambda function can be used in hof
+double = lambda x: x * 2
+
 #---------------string---------------------
 long_string = 'I\'ll catch you if you fall'
 print(long_string[0:3]) #get first n characters
