@@ -1,7 +1,11 @@
 var firstname = "John";
-
+var greeting = "Hola";
 // iife
-(function(name){
-    var greeting = "Hello " + name
+(function(global, name){
+    var greeting = "Hello " + name;
+    global.greeting = "Hello";
     console.log(greeting);
-})(firstname);
+})(window, firstname);
+
+console.log(greeting); //Hello
+
