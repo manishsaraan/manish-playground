@@ -65,3 +65,23 @@ var fs = buildFunctions2();
 fs[0](); // 0
 fs[1](); // 1
 fs[2](); // 2
+
+
+//use of closures
+function makeGreeting(lang){
+    return function(fname, lname){
+        if(lang === 'en'){
+            console.log('Hello ' + fname +' ' + lname);
+        }
+
+        if(lang === 'es'){
+            console.log('Hola ' + fname +' ' + lname);
+        }
+    }
+}
+
+var greetEng = makeGreeting('en');
+var greetSpn = makeGreeting('es');
+
+greetEng('john', 'doe');
+greetSpn('john', 'doe');
